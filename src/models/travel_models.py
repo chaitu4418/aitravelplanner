@@ -9,14 +9,21 @@ class TravelBudgetAllocator(BaseModel):
     duration_days: int
     category_weights: Optional[Dict[str, float]] = None
 
-    def __init__(self, **data):
+    def __init__(self, total_budget: float, trip_type: str, duration_days: int, category_weights: Optional[Dict[str, float]] = None):
         # Convert trip_type to Enum if needed
-        if isinstance(data.get("trip_type"), str):
+        if isinstance(trip_type, str):
             try:
-                data["trip_type"] = BudgetLevel(data["trip_type"])
+                trip_type_enum = BudgetLevel(trip_type)
             except ValueError:
-                data["trip_type"] = BudgetLevel.MEDIUM  # or some default
-        super().__init__(**data)
+                trip_type_enum = BudgetLevel.MEDIUM  # or some default
+        else:
+            trip_type_enum = trip_type
+        super().__init__(
+            total_budget=total_budget,
+            trip_type=trip_type_enum,
+            duration_days=duration_days,
+            category_weights=category_weights
+        )
         object.__setattr__(self, 'category_weights', self._set_base_weights())
 
     def _set_base_weights(self) -> dict:

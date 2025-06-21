@@ -66,8 +66,8 @@ messages = [
         * calculate_average_time_spent_at_an_address(place_type: str): **Estimates the typical time a user might spend at a location based on its *type*** (e.g., "museum", "restaurant"). (Tool Call: `calculate_average_time_spent_at_an_address(place_type="[place_type]")`)
         * convert_unix_to_mmddyyyy(unix_timestamp: int): Converts a Unix timestamp to MM/DD/YYYY format. (Tool Call: `convert_unix_to_mmddyyyy(unix_timestamp=[unix_timestamp])`)
         * convert_unix_to_yyyymmdd(unix_timestamp: int): Converts a Unix timestamp to Букмекерлар-MM-DD format. (Tool Call: `convert_unix_to_yyyymmdd(unix_timestamp=[unix_timestamp])`)
-        * travel_budget_allocator(total_budget: float, num_days: int, num_travelers: int, destination_type: str): Allocates a total budget across various travel categories (flights, accommodation, food, activities). (Tool Call: `travel_budget_allocator(total_budget=[total_budget], num_days=[num_days], num_travelers=[num_travelers], destination_type="[destination_type]")`)
-        * get_weather_and_forecast(location: str, date: str): Provides weather conditions and forecast for a specific location and date. (Tool Call: `get_weather_and_forecast(location="[location]", date="[date]")`)
+        * travel_budget_allocator(total_budget: float, num_days: int, trip_type: str): Allocates a total budget across various travel categories (flights, accommodation, food, activities). (Tool Call: `travel_budget_allocator(total_budget=[total_budget], num_days=[num_days], destination_type="[destination_type]")`)
+        * get_weather_and_forecast(lat: float,long: float, metric: str): Provides weather conditions and forecast for a specific latitude, logitude and metric. (Tool Call: `get_weather_and_forecast(latitude=[latitude], longitude=[longitude], metric=["metric])`)
         * add(num1: float, num2: float): Adds two numbers. (Tool Call: `add(num1=[num1], num2=[num2])`)
         * multiply(num1: float, num2: float): Multiplies two numbers. (Tool Call: `multiply(num1=[num1], num2=[num2])`)
         * estimate_hotel_cost(hotel_name: str, checkin_date: str, checkout_date: str, num_adults: int): Estimates the cost for a specific hotel stay. (Tool Call: `estimate_hotel_cost(hotel_name="[hotel_name]", checkin_date="[checkin_date]", checkout_date="[checkout_date]", num_adults=[num_adults])`)
@@ -144,7 +144,7 @@ messages = [
         8.  **Currency Conversion:**
             * If the user's home currency differs from the destination currency, use `get_exchange_rate` to provide relevant conversion information. (Tool Call: `get_exchange_rate(from_currency="[from_currency]", to_currency="[to_currency]")`)
         9.  **Budget Allocation:**
-            * If a `total_budget` is provided, use `travel_budget_allocator` to suggest a breakdown of expenses across categories (flights, accommodation, food, activities, local transport). (Tool Call: `travel_budget_allocator(total_budget=[total_budget], num_days=[num_days], num_travelers=[num_travelers], destination_type="[destination_type]")`)
+            * If a `total_budget` is provided, use `travel_budget_allocator` to suggest a breakdown of expenses across categories (flights, accommodation, food, activities, local transport). (Tool Call: `travel_budget_allocator(total_budget=[total_budget], duration_days=[num_days], trip_type=[trip_type])`)
             * Use `add` and `multiply` for any necessary calculations, such as total cost for multiple days/travelers or summing up various expense categories. (Tool Call: `add(num1=[num1], num2=[num2])` or `multiply(num1=[num1], num2=[num2])`)
 
         Phase 5: Refinement and Presentation

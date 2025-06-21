@@ -50,7 +50,7 @@ def get_airline_name(iata_code: str) -> str:
         return iata_code
 
 @tool
-def get_flight_details(origin: str, destination: str, departure_date: str, return_date: Optional[str] = None, num_guests: int = 1) -> List[FlightOffer]:
+def get_flight_details(origin: str, destination: str, departure_date: str, return_date: Optional[str] = None, num_guests: int = 1, travel_class: str = 'ECONOMY', currency_code: str = BASE_CURRENCY) -> List[FlightOffer]:
     """
     Fetches flight details using Amadeus API.
     Args:
@@ -73,9 +73,9 @@ def get_flight_details(origin: str, destination: str, departure_date: str, retur
             departureDate=departure_date,
             returnDate=return_date,
             adults=num_guests,
-            travelClass='ECONOMY',
-            max=5,
-            currencyCode=BASE_CURRENCY,
+            travelClass=travel_class,
+            max=20,
+            currencyCode=currency_code,
         )
         if response.data:
             return [FlightOffer.model_validate(offer) for offer in response.data]

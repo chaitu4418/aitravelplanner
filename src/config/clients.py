@@ -2,6 +2,7 @@ import os
 import googlemaps
 import amadeus
 from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Import settings to get API keys and default values
 from .settings import (
@@ -51,4 +52,8 @@ else:
 if os.getenv('OPENAI_API_KEY') is None:
     print("Error: OPENAI_API_KEY environment variable not set.")
     
-LLM = ChatOpenAI(model_name="gpt-4o", temperature=0.2)
+#LLM = ChatOpenAI(model_name="gpt-4o", temperature=0.2)
+LLM = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    temperature=0.7
+)
